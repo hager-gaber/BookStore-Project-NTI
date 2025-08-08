@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Harry Potter and the Philosopher's Stone",
+    "description": "The first novel in the Harry Potter series.",
+    "author": "64f9a6e9137a3b0f3bba01d1",
+    "category": "64f9a6fe137a3b0f3bba01d2",
+    "price": 10.99,
+    "publishedYear": 1997
+  },
+  {
+    "title": "The Hobbit",
+    "description": "Bilbo Baggins' unexpected journey.",
+    "author": "64f9a70c137a3b0f3bba01d3",
+    "category": "64f9a6fe137a3b0f3bba01d2",
+    "price": 8.5,
+    "publishedYear": 1937
+  },
+  {
+    "title": "1984",
+    "description": "A dystopian novel about totalitarian regime.",
+    "author": "64f9a71a137a3b0f3bba01d4",
+    "category": "64f9a727137a3b0f3bba01d5",
+    "price": 6.99,
+    "publishedYear": 1949
+  },
+  {
+    "title": "The Da Vinci Code",
+    "description": "A symbologist uncovers secrets in a murder mystery.",
+    "author": "64f9a72e137a3b0f3bba01d6",
+    "category": "64f9a727137a3b0f3bba01d5",
+    "price": 12.75,
+    "publishedYear": 2003
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "description": "A story of racial injustice in the Deep South.",
+    "author": "64f9a737137a3b0f3bba01d7",
+    "category": "64f9a73e137a3b0f3bba01d8",
+    "price": 7.5,
+    "publishedYear": 1960
+  }
+]

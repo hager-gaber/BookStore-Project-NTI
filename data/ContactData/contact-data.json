@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Sara Mohamed",
+    "email": "sara.mohamed@example.com",
+    "message": "I'm interested in your latest book releases. Please send more info."
+  },
+  {
+    "name": "Omar Youssef",
+    "email": "omar.youssef@example.com",
+    "message": "Having trouble logging into my account."
+  },
+  {
+    "name": "Laila Hassan",
+    "email": "laila.hassan@example.com",
+    "message": "Do you offer international shipping for printed books?"
+  },
+  {
+    "name": "Khaled Nabil",
+    "email": "khaled.nabil@example.com",
+    "message": "Great service! Just wanted to say thank you."
+  },
+  {
+    "name": "Nada Ali",
+    "email": "nada.ali@example.com",
+    "message": "Can I get a discount if I order in bulk?"
+  }
+]
