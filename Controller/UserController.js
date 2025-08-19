@@ -2,18 +2,19 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const getAllUsers = async (req, res) => {
+const getMe = async (req, res) => {
   try {
-    const users = await User.find({}, { password: 0, __v: 0 });
-    res.status(200).json({
-      status: "success",
-      length: users.length,
-      data: { users },
-    });
+    const user = await User.findById(req.userId).select("-password -__v");
+    if (!user) {
+      return res.status(404).json({ status: "fail", message: "User not found" });
+    }
+    res.status(200).json({ status: "success", data: { user } });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    res.status(500).json({ status: "fail", message: error.message });
   }
 };
+
+
 const signup = async (req, res) => {
   try {
     let { name, email, password, confirmPassword, role } = req.body;
@@ -42,7 +43,7 @@ const signup = async (req, res) => {
     });
 
     const token = jwt.sign(
-      { id: user._id, name: user.name },
+      { id: user._id, name: user.name , role:user.role},
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
@@ -85,7 +86,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id, name: user.name },
+      { id: user._id, name: user.name , role:user.role },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
@@ -115,19 +116,20 @@ const protectRoutes = async (req, res, next) => {
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decodedToken.id;
+    req.userRole = decodedToken.role;
     next();
   } catch (error) {
     res.status(401).json({ status: "fail", message: error.message });
   }
 };
-const updateUser = async (req, res) => {
-  try {
-    const { id } = req.params;
 
-    const updatedUser = await User.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    }).select("-password -__v");
+const updateMe = async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.userId,
+      req.body,
+      { new: true, runValidators: true }
+    ).select("-password -__v");
 
     if (!updatedUser) {
       return res.status(404).json({ status: "fail", message: "User not found" });
@@ -139,26 +141,12 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
-  try {
-    const { id } = req.params;
 
-    const deletedUser = await User.findByIdAndDelete(id);
-    if (!deletedUser) {
-      return res.status(404).json({ status: "fail", message: "User not found" });
-    }
-
-    res.status(200).json({ status: "success", message: "User deleted" });
-  } catch (error) {
-    res.status(500).json({ status: "fail", message: error.message });
-  }
-};
 
 module.exports = {
   signup,
-  getAllUsers,
+  getMe,
   login,
   protectRoutes,
-  updateUser,
-  deleteUser,
+  updateMe,
 };
